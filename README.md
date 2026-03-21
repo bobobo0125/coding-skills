@@ -101,6 +101,22 @@ coding-skills/
         └── block-type.md
 ```
 
+## 安装
+
+将本项目克隆到 Claude Code 的 skills 目录：
+
+```bash
+# 克隆项目到 Claude Code skills 目录
+git clone https://github.com/your-repo/coding-skills.git ~/.claude/skills/coding-skills
+```
+
+或使用符号链接：
+
+```bash
+# 或者创建符号链接（推荐，便于更新）
+ln -s /path/to/coding-skills ~/.claude/skills/coding-skills
+```
+
 ## 使用方式
 
 通过 Task 工具调用对应 skill：
