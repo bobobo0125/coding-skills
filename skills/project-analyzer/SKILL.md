@@ -74,7 +74,7 @@ metadata:
 ### 步骤0：准备
 
 1. 读取模板文件
-2. 在当前工程目录下创建 `doc/` 目录
+2. 在当前工程目录下创建 `wiki/` 目录
 3. 创建分析任务清单
 
 ### 步骤1-12：顺序分析
@@ -175,6 +175,31 @@ gh api repos/owner/repo/contents/package.json
 - 使用Mermaid图表增强表达
 - 提供具体细节，避免泛泛而谈
 - 注明信息来源（GitHub、文档等）
+- 每个主题的分析结果将生成对应的规则文档，保存在 `wiki/` 目录下
+- 这些规则文档会在后续的编码开发（coding-skill）和代码审查（coding-review-skill）中被自动读取和应用
+
+## 规则自动应用机制
+
+项目分析完成后，生成的规则文档会自动应用于后续开发流程：
+
+### 规则文档类型
+
+| 规则文件 | 用途 | 后续应用场景 |
+|---------|------|-------------|
+| `wiki/架构规范.md` | 项目架构约束 | coding-skill 中遵循项目架构模式 |
+| `wiki/编码规则.md` | 代码风格和约定 | coding-skill 中应用项目特定规范 |
+| `wiki/CR规则.md` | 代码审查标准 | coding-review-skill 中的审查要点 |
+| `wiki/技术栈规范.md` | 技术选型和依赖 | 编码时使用正确的技术栈 |
+
+### 自动读取规则
+
+- **coding-skill** 执行时会自动读取 `wiki/架构规范.md` 和 `wiki/编码规则.md`
+- **coding-review-skill** 执行时会自动读取 `wiki/CR规则.md` 和 `wiki/架构规范.md`
+- 如果规则文件不存在，跳过该规则应用（不报错）
+
+### 规则更新
+
+当项目进行重大架构变更后，可重新运行项目分析以更新规则文档。
 
 ## 输出示例
 
@@ -206,7 +231,7 @@ gh api repos/owner/repo/contents/package.json
 [... 继续完成所有12个主题 ...]
 
 ✅ 分析完成！
-分析文档保存位置：/Users/ccc/work/todo/kubernetes/doc/kubernetes-analysis.md
+分析文档保存位置：/Users/ccc/work/todo/kubernetes/wiki/kubernetes-analysis.md
 
 是否需要深入了解某个特定领域？
 ```
