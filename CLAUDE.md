@@ -7,6 +7,7 @@
 | Skill | 用途 | 触发关键词 |
 |-------|------|-----------|
 | `prd-analysis` | 需求分析 - 将模糊需求转化为可测试的需求文档 | 需求分析、PRD、功能请求、问题陈述 |
+| `design-solution` | 技术方案设计 - 将需求文档转化为可执行的技术方案 | 技术方案、设计方案、技术选型、架构设计 |
 | `project-analyzer` | 项目分析 - 分析现有项目的架构和技术栈 | 分析项目、审查代码、评估仓库 |
 | `coding-skill` | 代码开发 - 基于阿里规范进行Java开发 | 编写代码、开发功能、编码规范 |
 | `coding-review-skill` | 代码审查 - 在合并前验证代码质量 | 代码审查、请求审查、合并前检查 |
@@ -33,7 +34,26 @@
 - 需求验证通过前禁止进行任何设计或编码
 - 禁止跳过需求分析直接询问"如何实现"
 
-### 2. 项目分析阶段 (Project Analyzer)
+### 2. 设计阶段 (Design Solution)
+
+**必须使用 `design-solution` skill 的场景：**
+
+- 需求已通过验证，需要设计技术实现方案
+- 需要进行架构设计、技术选型
+- 需要定义接口、数据模型、业务流程
+
+**执行步骤：**
+
+1. 使用 `design-solution` skill 进行技术方案设计
+2. 生成技术方案文档并获得团队评审确认
+3. 只有在技术方案评审通过后才能进入开发阶段
+
+**硬约束：**
+- 设计必须可追溯到需求（每个设计决策对应需求 ID）
+- 技术选型必须有明确理由
+- 方案必须经过评审才能进入开发
+
+### 3. 项目分析阶段 (Project Analyzer)
 
 **可选使用 `project-analyzer` skill 的场景：**
 
@@ -104,6 +124,9 @@ Task --subagent_type <skill-name> --prompt <task-description>
 # 需求分析
 Task --subagent_type prd-analysis --prompt "分析用户的需求..."
 
+# 技术方案设计
+Task --subagent_type design-solution --prompt "基于需求文档设计技术方案..."
+
 # 代码开发
 Task --subagent_type coding-skill --prompt "实现用户认证功能..."
 
@@ -121,7 +144,8 @@ Task --subagent_type coding-review-skill --prompt "审查刚完成的代码..."
 ## 禁止行为
 
 - ❌ 跳过需求分析直接编码
+- ❌ 跳过技术方案设计直接编码
 - ❌ 跳过代码审查直接合并
 - ❌ 忽略编码规范
 - ❌ 在需求未验证时提出技术方案
-- ❌ 使用未批准的方案进行开发
+- ❌ 在方案未评审时进行开发
