@@ -74,7 +74,7 @@ metadata:
 ### 步骤0：准备
 
 1. 读取模板文件
-2. 在项目目录下创建 `ai-analysis-docs/` 目录
+2. 在当前工程目录下创建 `doc/` 目录
 3. 创建分析任务清单
 
 ### 步骤1-12：顺序分析
@@ -206,7 +206,7 @@ gh api repos/owner/repo/contents/package.json
 [... 继续完成所有12个主题 ...]
 
 ✅ 分析完成！
-分析文档保存位置：/Users/ccc/work/todo/kubernetes/ai-analysis-docs/kubernetes-analysis.md
+分析文档保存位置：/Users/ccc/work/todo/kubernetes/doc/kubernetes-analysis.md
 
 是否需要深入了解某个特定领域？
 ```
